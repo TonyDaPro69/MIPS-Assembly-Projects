@@ -6,16 +6,17 @@
 #Checks if numbers are equal, prints result.
 
 .data 
-prompt1: .asciiz "Please enter the first integer: "
-prompt2: .asciiz "Please enter the second integer: "
-numsBack: .asciiz "The numbers entered are:"
-numsSum: .asciiz "The sum of the numbers is: "
-numsDiff: .asciiz "The difference of the numbers is: "
-numsProduct: .asciiz "The product of the numbers is: "
-numsQuo: .asciiz "The quotient of the numbers is: "
+prompt1: .asciiz "\nPlease enter the first integer: "
+prompt2: .asciiz "\nPlease enter the second integer: "
+numsBack: .asciiz "\nThe numbers entered are: "
+and: .asciiz " and "
+numsSum: .asciiz "\nThe sum of the numbers is: "
+numsDiff: .asciiz "\nThe difference of the numbers is: "
+numsProduct: .asciiz "\nThe product of the numbers is: "
+numsQuo: .asciiz "\nThe quotient of the numbers is: "
 numsRemainder: .asciiz " with a remainder of "
-numsEqual: .asciiz "User inputs are the same"
-numsNotEqual: .asciiz "User inputs are different."
+numsEqual: .asciiz "\nUser inputs are the same"
+numsNotEqual: .asciiz "\nUser inputs are different."
 newLine: .asciiz "\n"
 
 .text
@@ -42,25 +43,17 @@ main:
 	li $v0, 4 
 	la $a0, numsBack
 	syscall
-	#Print a new line
-	li $v0, 4 
-	la $a0, newLine
-	syscall
 	#Print out first number
 	move $a0, $s0
 	li $v0, 1
 	syscall
-	#Print a new line
-	li $v0, 4 
-	la $a0, newLine
+	#and
+	li $v0, 4
+	la $a0, and 
 	syscall
 	#Print out second number
 	move $a0, $s1
 	li $v0, 1
-	syscall
-	#Print a new line
-	li $v0, 4 
-	la $a0, newLine
 	syscall
 	
 	j math
@@ -81,10 +74,6 @@ math:
 	move $a0, $t0
 	li $v0, 1
 	syscall
-	#Print a new line
-	li $v0, 4 
-	la $a0, newLine
-	syscall
 	#Print out subtraction result
 	li $v0, 4 
 	la $a0, numsDiff
@@ -92,20 +81,12 @@ math:
 	move $a0, $t1
 	li $v0, 1
 	syscall
-	#Print a new line
-	li $v0, 4 
-	la $a0, newLine
-	syscall
 	#Print out multiplication result
 	li $v0, 4 
 	la $a0, numsProduct
 	syscall
 	move $a0, $t2
 	li $v0, 1
-	syscall
-	#Print a new line
-	li $v0, 4 
-	la $a0, newLine
 	syscall
 	#Print out division result
 	li $v0, 4 
@@ -130,10 +111,6 @@ remainder:
 	
 	j checkEquals
 checkEquals:
-	#Print a new line
-	li $v0, 4 
-	la $a0, newLine
-	syscall
 	
 	#compare if number are equal or not
 	beq $s0, $s1, equal	#if nums equal, go to equal
